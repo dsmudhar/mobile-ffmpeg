@@ -52,28 +52,28 @@ mkdir -p $BUILDPATH
 cp -r $SDLPATH/android-project/* $BUILDPATH
 
 # Copy SDL sources
-mkdir -p $BUILDPATH/app/jni/SDL
+mkdir -p $BUILDPATH/ffmpeg/jni/SDL
 if [ -z "$COPYSOURCE" ]; then
-    ln -s $SDLPATH/src $BUILDPATH/app/jni/SDL
-    ln -s $SDLPATH/include $BUILDPATH/app/jni/SDL
+    ln -s $SDLPATH/src $BUILDPATH/ffmpeg/jni/SDL
+    ln -s $SDLPATH/include $BUILDPATH/ffmpeg/jni/SDL
 else
-    cp -r $SDLPATH/src $BUILDPATH/app/jni/SDL
-    cp -r $SDLPATH/include $BUILDPATH/app/jni/SDL
+    cp -r $SDLPATH/src $BUILDPATH/ffmpeg/jni/SDL
+    cp -r $SDLPATH/include $BUILDPATH/ffmpeg/jni/SDL
 fi
 
-cp -r $SDLPATH/Android.mk $BUILDPATH/app/jni/SDL
-sed -i -e "s|YourSourceHere.c|$MKSOURCES|g" $BUILDPATH/app/jni/src/Android.mk
-sed -i -e "s|org\.libsdl\.app|$APP|g" $BUILDPATH/app/build.gradle
-sed -i -e "s|org\.libsdl\.app|$APP|g" $BUILDPATH/app/src/main/AndroidManifest.xml
+cp -r $SDLPATH/Android.mk $BUILDPATH/ffmpeg/jni/SDL
+sed -i -e "s|YourSourceHere.c|$MKSOURCES|g" $BUILDPATH/ffmpeg/jni/src/Android.mk
+sed -i -e "s|org\.libsdl\.app|$APP|g" $BUILDPATH/ffmpeg/build.gradle
+sed -i -e "s|org\.libsdl\.app|$APP|g" $BUILDPATH/ffmpeg/src/main/AndroidManifest.xml
 
 # Copy user sources
 for src in "${SOURCES[@]}"
 do
-    cp $src $BUILDPATH/app/jni/src
+    cp $src $BUILDPATH/ffmpeg/jni/src
 done
 
 # Create an inherited Activity
-cd $BUILDPATH/app/src/main/java
+cd $BUILDPATH/ffmpeg/src/main/java
 for folder in "${APPARR[@]}"
 do
     mkdir -p $folder
@@ -81,7 +81,7 @@ do
 done
 
 ACTIVITY="${folder}Activity"
-sed -i -e "s|\"SDLActivity\"|\"$ACTIVITY\"|g" $BUILDPATH/app/src/main/AndroidManifest.xml
+sed -i -e "s|\"SDLActivity\"|\"$ACTIVITY\"|g" $BUILDPATH/ffmpeg/src/main/AndroidManifest.xml
 
 # Fill in a default Activity
 cat >"$ACTIVITY.java" <<__EOF__

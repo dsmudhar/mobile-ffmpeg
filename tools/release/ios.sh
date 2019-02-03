@@ -50,7 +50,7 @@ MOBILE_FFMPEG_VERSION=$(grep 'MOBILE_FFMPEG_VERSION ' ${BASEDIR}/../../ios/src/M
 if [[ "${MOBILE_FFMPEG_VERSION}" != "$1" ]]; then
     echo "Error: version mismatch. v$1 requested but v${MOBILE_FFMPEG_VERSION} found. Please perform the following updates and try again."
     echo "1. Update docs"
-    echo "2. Update android/app/build.gradle file versions"
+    echo "2. Update android/ffmpeg/build.gradle file versions"
     echo "3. Update tools/release scripts' descriptions"
     echo "4. Update podspec links"
     echo "5. Update mobileffmpeg.h versions for both android and ios"

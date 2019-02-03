@@ -66,7 +66,7 @@ export MOBILE_FFMPEG_TMPDIR="${BASEDIR}/.tmp"
 export API=24
 
 get_mobile_ffmpeg_version() {
-    local MOBILE_FFMPEG_VERSION=$(grep '#define MOBILE_FFMPEG_VERSION' ${BASEDIR}/android/app/src/main/cpp/mobileffmpeg.h | grep -Eo '\".*\"' | sed -e 's/\"//g')
+    local MOBILE_FFMPEG_VERSION=$(grep '#define MOBILE_FFMPEG_VERSION' ${BASEDIR}/android/ffmpeg/src/main/cpp/mobileffmpeg.h | grep -Eo '\".*\"' | sed -e 's/\"//g')
 
     echo ${MOBILE_FFMPEG_VERSION}
 }
@@ -701,7 +701,7 @@ if [[ ! -z ${ANDROID_ARCHITECTURES} ]]; then
         exit 1
     fi
 
-    cp ${BASEDIR}/android/app/build/outputs/aar/mobile-ffmpeg-*.aar ${MOBILE_FFMPEG_AAR}/mobile-ffmpeg.aar 1>>${BASEDIR}/build.log 2>&1
+    cp ${BASEDIR}/android/ffmpeg/build/outputs/aar/mobile-ffmpeg-*.aar ${MOBILE_FFMPEG_AAR}/mobile-ffmpeg.aar 1>>${BASEDIR}/build.log 2>&1
 
     if [ $? -ne 0 ]; then
         echo -e "failed\n"

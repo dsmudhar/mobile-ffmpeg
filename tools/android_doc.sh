@@ -5,6 +5,6 @@
 
 CURRENT_DIR="`pwd`"
 
-cd ${CURRENT_DIR}/../android/app
+cd ${CURRENT_DIR}/../android/ffmpeg
 
 doxygen

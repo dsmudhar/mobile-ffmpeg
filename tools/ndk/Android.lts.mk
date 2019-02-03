@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 $(call import-add-path, $(LOCAL_PATH))
 
 MY_ARM_MODE := arm
-MY_PATH := ../app/src/main/cpp
+MY_PATH := ../ffmpeg/src/main/cpp
 
 # DEFINE ARCH FLAGS
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)

@@ -5,4 +5,4 @@
 
 CURRENT_DIR="`pwd`"
 
-gradle -b ${CURRENT_DIR}/../android/app/build.gradle clean build javadoc
+gradle -b ${CURRENT_DIR}/../android/ffmpeg/build.gradle clean build javadoc
