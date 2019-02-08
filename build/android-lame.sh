@@ -46,15 +46,15 @@ fi
 ./configure \
     --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
     --with-pic \
-    --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
-    --disable-decoder \
     --enable-static \
+    --disable-decoder \
     --disable-shared \
     --disable-fast-install \
     --disable-maintainer-mode \
     --disable-frontend \
     --disable-efence \
     --disable-gtktest \
+    --without-libiconv-prefix \
     --host=${TARGET_HOST} || exit 1
 
 make -j$(get_cpu_count) || exit 1

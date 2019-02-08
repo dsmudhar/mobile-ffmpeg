@@ -57,7 +57,6 @@ check_if_dependency_rebuilt() {
         libiconv)
             set_dependency_rebuilt_flag "fontconfig"
             set_dependency_rebuilt_flag "gnutls"
-            set_dependency_rebuilt_flag "lame"
             set_dependency_rebuilt_flag "libass"
             set_dependency_rebuilt_flag "libxml2"
         ;;
@@ -149,11 +148,6 @@ while [ ${#enabled_library_list[@]} -gt $completed ]; do
             ;;
             gnutls)
                 if [[ ! -z $OK_nettle ]] && [[ ! -z $OK_gmp ]] && [[ ! -z $OK_libiconv ]]; then
-                    run=1
-                fi
-            ;;
-            lame)
-                if [[ ! -z $OK_libiconv ]]; then
                     run=1
                 fi
             ;;
