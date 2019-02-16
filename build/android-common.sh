@@ -950,10 +950,19 @@ set_toolchain_clang_paths() {
     export PATH=$PATH:$(get_toolchain_root)/bin
 
     TARGET_HOST=$(get_target_host)
-    
+
+    # From Docs, Note: For 32-bit ARM, the compiler is prefixed with armv7a-linux-androideabi, but the binutils tools are prefixed with arm-linux-androideabi. For other architectures, the prefixes are the same for all tools.
+    case ${ARCH} in
+        arm-v7a | arm-v7a-neon)
+            export CC=armv7a-linux-androideabi${API}-clang
+            export CXX=armv7a-linux-androideabi${API}-clang++
+        ;;
+        *)
+            export CC=${TARGET_HOST}${API}-clang
+            export CXX=${TARGET_HOST}${API}-clang++
+    esac
+
     export AR=${TARGET_HOST}-ar
-    export CC=${TARGET_HOST}-clang
-    export CXX=${TARGET_HOST}-clang++
 
     if [ "$1" == "x264" ]; then
         export AS=${CC}
@@ -985,14 +994,6 @@ set_toolchain_clang_paths() {
     prepare_inline_sed
 }
 
-create_toolchain() {
-    local TOOLCHAIN_DIR="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-"${TOOLCHAIN}
-
-    if [ ! -d ${TOOLCHAIN_DIR} ]; then
-        ${ANDROID_NDK_ROOT}/build/tools/make_standalone_toolchain.py --arch ${TOOLCHAIN_ARCH} --api ${API} --stl libc++ --install-dir ${TOOLCHAIN_DIR} || exit 1
-    fi
-}
-
 build_cpufeatures() {
 
     # CLEAN OLD BUILD
@@ -1005,9 +1006,9 @@ build_cpufeatures() {
     echo -e "\nINFO: Building cpu-features for for ${ARCH}\n" 1>>${BASEDIR}/build.log 2>&1
 
     # THEN BUILD FOR THIS ABI
-    ${TARGET_HOST}-clang -c ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/cpu-features.c -o ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/cpu-features.o 1>>${BASEDIR}/build.log 2>&1
-    ${TARGET_HOST}-ar rcs ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/libcpufeatures.a ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/cpu-features.o 1>>${BASEDIR}/build.log 2>&1
-    ${TARGET_HOST}-clang -shared ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/cpu-features.o -o ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/libcpufeatures.so 1>>${BASEDIR}/build.log 2>&1
+    ${CC} -c ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/cpu-features.c -o ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/cpu-features.o 1>>${BASEDIR}/build.log 2>&1
+    ${AR} rcs ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/libcpufeatures.a ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/cpu-features.o 1>>${BASEDIR}/build.log 2>&1
+    ${CC} -shared ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/cpu-features.o -o ${ANDROID_NDK_ROOT}/sources/android/cpufeatures/libcpufeatures.so 1>>${BASEDIR}/build.log 2>&1
 
     create_cpufeatures_package_config
 }

@@ -316,6 +316,8 @@ export LDFLAGS="${LDFLAGS}"
 
 ./configure \
     --cross-prefix="${TARGET_HOST}-" \
+    --cc="${CC}" \
+    --cxx="${CXX}" \
     --sysroot="$(get_toolchain_root)/sysroot" \
     --prefix="$(get_prefix_root)/${LIB_NAME}" \
     --pkg-config="${HOST_PKG_CONFIG_PATH}" \
