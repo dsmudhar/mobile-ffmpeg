@@ -602,7 +602,7 @@ do
             echo -e "\n(*) Invalid configuration detected. GPL library ${library_name} enabled without --enable-gpl flag.\n" 1>>${BASEDIR}/build.log 2>&1
             exit 1
         else
-            DOWNLOAD_RESULT=$(download_gpl_library_source ${library_name})
+            DOWNLOAD_RESULT=$(download_library_source ${library_name})
             if [[ ${DOWNLOAD_RESULT} -ne 0 ]]; then
                 echo -e "\n(*) Failed to download GPL library ${library_name} source. Please check build.log file for details. If the problem persists refer to offline building instructions.\n"
                 echo -e "\n(*) Failed to download GPL library ${library_name} source.\n" 1>>${BASEDIR}/build.log 2>&1

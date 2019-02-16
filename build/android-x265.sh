@@ -36,7 +36,7 @@ LDFLAGS=$(get_ldflags ${LIB_NAME})
 # USE CLEAN SOURCE ON EACH BUILD
 cd ${BASEDIR}/src || exit 1
 rm -rf ${LIB_NAME} || exit 1
-DOWNLOAD_RESULT=$(download_gpl_library_source ${LIB_NAME})
+DOWNLOAD_RESULT=$(download_library_source ${LIB_NAME})
 if [[ ${DOWNLOAD_RESULT} -ne 0 ]]; then
     exit 1
 fi

@@ -863,60 +863,60 @@ download() {
     echo ${RC}
 }
 
-download_gpl_library_source() {
-    local GPL_LIB_URL=""
-    local GPL_LIB_FILE=""
-    local GPL_LIB_ORIG_DIR=""
-    local GPL_LIB_DEST_DIR=""
+download_library_source() {
+    local LIB_URL=""
+    local LIB_FILE=""
+    local LIB_ORIG_DIR=""
+    local LIB_DEST_DIR=""
 
-    echo -e "\nDEBUG: Downloading GPL library source: $1\n" 1>>${BASEDIR}/build.log 2>&1
+    echo -e "\nDEBUG: Downloading library source: $1\n" 1>>${BASEDIR}/build.log 2>&1
 
     case $1 in
         libvidstab)
-            GPL_LIB_URL="https://github.com/georgmartius/vid.stab/archive/v1.1.0.tar.gz"
-            GPL_LIB_FILE="v1.1.0.tar.gz"
-            GPL_LIB_ORIG_DIR="vid.stab-1.1.0"
-            GPL_LIB_DEST_DIR="libvidstab"
+            LIB_URL="https://github.com/georgmartius/vid.stab/archive/v1.1.0.tar.gz"
+            LIB_FILE="v1.1.0.tar.gz"
+            LIB_ORIG_DIR="vid.stab-1.1.0"
+            LIB_DEST_DIR="libvidstab"
         ;;
         x264)
-            GPL_LIB_URL="ftp://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20181224-2245-stable.tar.bz2"
-            GPL_LIB_FILE="x264-snapshot-20181224-2245-stable.tar.bz2"
-            GPL_LIB_ORIG_DIR="x264-snapshot-20181224-2245-stable"
-            GPL_LIB_DEST_DIR="x264"
+            LIB_URL="ftp://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20181224-2245-stable.tar.bz2"
+            LIB_FILE="x264-snapshot-20181224-2245-stable.tar.bz2"
+            LIB_ORIG_DIR="x264-snapshot-20181224-2245-stable"
+            LIB_DEST_DIR="x264"
         ;;
         x265)
-            GPL_LIB_URL="https://download.videolan.org/pub/videolan/x265/x265_2.9.tar.gz"
-            GPL_LIB_FILE="x265-2.9.tar.gz"
-            GPL_LIB_ORIG_DIR="x265_2.9"
-            GPL_LIB_DEST_DIR="x265"
+            LIB_URL="https://download.videolan.org/pub/videolan/x265/x265_2.9.tar.gz"
+            LIB_FILE="x265-2.9.tar.gz"
+            LIB_ORIG_DIR="x265_2.9"
+            LIB_DEST_DIR="x265"
         ;;
         xvidcore)
-            GPL_LIB_URL="https://downloads.xvid.com/downloads/xvidcore-1.3.5.tar.gz"
-            GPL_LIB_FILE="xvidcore-1.3.5.tar.gz"
-            GPL_LIB_ORIG_DIR="xvidcore"
-            GPL_LIB_DEST_DIR="xvidcore"
+            LIB_URL="https://downloads.xvid.com/downloads/xvidcore-1.3.5.tar.gz"
+            LIB_FILE="xvidcore-1.3.5.tar.gz"
+            LIB_ORIG_DIR="xvidcore"
+            LIB_DEST_DIR="xvidcore"
         ;;
     esac
 
-    local GPL_LIB_SOURCE_PATH="${BASEDIR}/src/${GPL_LIB_DEST_DIR}"
+    local LIB_SOURCE_PATH="${BASEDIR}/src/${LIB_DEST_DIR}"
 
-    if [ -d "${GPL_LIB_SOURCE_PATH}" ]; then
-        echo -e "INFO: $1 already downloaded. Source folder found at ${GPL_LIB_SOURCE_PATH}\n" 1>>${BASEDIR}/build.log 2>&1
+    if [ -d "${LIB_SOURCE_PATH}" ]; then
+        echo -e "INFO: $1 already downloaded. Source folder found at ${LIB_SOURCE_PATH}\n" 1>>${BASEDIR}/build.log 2>&1
         echo 0
         return
     fi
 
-    local GPL_LIB_PACKAGE_PATH="${MOBILE_FFMPEG_TMPDIR}/${GPL_LIB_FILE}"
+    local LIB_PACKAGE_PATH="${MOBILE_FFMPEG_TMPDIR}/${LIB_FILE}"
 
-    echo -e "DEBUG: $1 source not found. Checking if library package ${GPL_LIB_FILE} is downloaded at ${GPL_LIB_PACKAGE_PATH} \n" 1>>${BASEDIR}/build.log 2>&1
+    echo -e "DEBUG: $1 source not found. Checking if library package ${LIB_FILE} is downloaded at ${LIB_PACKAGE_PATH} \n" 1>>${BASEDIR}/build.log 2>&1
 
-    if [ ! -f "${GPL_LIB_PACKAGE_PATH}" ]; then
-        echo -e "DEBUG: $1 library package not found. Downloading from ${GPL_LIB_URL}\n" 1>>${BASEDIR}/build.log 2>&1
+    if [ ! -f "${LIB_PACKAGE_PATH}" ]; then
+        echo -e "DEBUG: $1 library package not found. Downloading from ${LIB_URL}\n" 1>>${BASEDIR}/build.log 2>&1
 
-        local DOWNLOAD_RC=$(download "${GPL_LIB_URL}" "${GPL_LIB_FILE}")
+        local DOWNLOAD_RC=$(download "${LIB_URL}" "${LIB_FILE}")
 
         if [ ${DOWNLOAD_RC} -ne 0 ]; then
-            echo -e "INFO: Downloading GPL library $1 failed. Can not get library package from ${GPL_LIB_URL}\n" 1>>${BASEDIR}/build.log 2>&1
+            echo -e "INFO: Downloading library $1 failed. Can not get library package from ${LIB_URL}\n" 1>>${BASEDIR}/build.log 2>&1
             echo ${DOWNLOAD_RC}
             return
         else
@@ -928,39 +928,39 @@ download_gpl_library_source() {
 
     local EXTRACT_COMMAND=""
 
-    if [[ ${GPL_LIB_FILE} == *bz2 ]]; then
-        EXTRACT_COMMAND="tar jxf ${GPL_LIB_PACKAGE_PATH} --directory ${MOBILE_FFMPEG_TMPDIR}"
+    if [[ ${LIB_FILE} == *bz2 ]]; then
+        EXTRACT_COMMAND="tar jxf ${LIB_PACKAGE_PATH} --directory ${MOBILE_FFMPEG_TMPDIR}"
     else
-        EXTRACT_COMMAND="tar zxf ${GPL_LIB_PACKAGE_PATH} --directory ${MOBILE_FFMPEG_TMPDIR}"
+        EXTRACT_COMMAND="tar zxf ${LIB_PACKAGE_PATH} --directory ${MOBILE_FFMPEG_TMPDIR}"
     fi
 
-    echo -e "DEBUG: Extracting library package ${GPL_LIB_FILE} inside ${MOBILE_FFMPEG_TMPDIR}\n" 1>>${BASEDIR}/build.log 2>&1
+    echo -e "DEBUG: Extracting library package ${LIB_FILE} inside ${MOBILE_FFMPEG_TMPDIR}\n" 1>>${BASEDIR}/build.log 2>&1
 
     ${EXTRACT_COMMAND} 1>>${BASEDIR}/build.log 2>&1
 
     local EXTRACT_RC=$?
 
     if [ ${EXTRACT_RC} -ne 0 ]; then
-        echo -e "\nINFO: Downloading GPL library $1 failed. Extract for library package ${GPL_LIB_FILE} completed with rc=${EXTRACT_RC}. Deleting failed files.\n" 1>>${BASEDIR}/build.log 2>&1
-        rm -f ${GPL_LIB_PACKAGE_PATH} 1>>${BASEDIR}/build.log 2>&1
-        rm -rf ${MOBILE_FFMPEG_TMPDIR}/${GPL_LIB_ORIG_DIR} 1>>${BASEDIR}/build.log 2>&1
+        echo -e "\nINFO: Downloading library $1 failed. Extract for library package ${LIB_FILE} completed with rc=${EXTRACT_RC}. Deleting failed files.\n" 1>>${BASEDIR}/build.log 2>&1
+        rm -f ${LIB_PACKAGE_PATH} 1>>${BASEDIR}/build.log 2>&1
+        rm -rf ${MOBILE_FFMPEG_TMPDIR}/${LIB_ORIG_DIR} 1>>${BASEDIR}/build.log 2>&1
         echo ${EXTRACT_RC}
         return
     fi
 
-    echo -e "DEBUG: Extract completed. Copying library source to ${GPL_LIB_SOURCE_PATH}\n" 1>>${BASEDIR}/build.log 2>&1
+    echo -e "DEBUG: Extract completed. Copying library source to ${LIB_SOURCE_PATH}\n" 1>>${BASEDIR}/build.log 2>&1
 
-    COPY_COMMAND="cp -r ${MOBILE_FFMPEG_TMPDIR}/${GPL_LIB_ORIG_DIR} ${GPL_LIB_SOURCE_PATH}"
+    COPY_COMMAND="cp -r ${MOBILE_FFMPEG_TMPDIR}/${LIB_ORIG_DIR} ${LIB_SOURCE_PATH}"
 
     ${COPY_COMMAND} 1>>${BASEDIR}/build.log 2>&1
 
     local COPY_RC=$?
 
     if [ ${COPY_RC} -eq 0 ]; then
-        echo -e "DEBUG: Downloading GPL library source $1 completed successfully\n" 1>>${BASEDIR}/build.log 2>&1
+        echo -e "DEBUG: Downloading library source $1 completed successfully\n" 1>>${BASEDIR}/build.log 2>&1
     else
-        echo -e "\nINFO: Downloading GPL library $1 failed. Copying library source to ${GPL_LIB_SOURCE_PATH} completed with rc=${COPY_RC}\n" 1>>${BASEDIR}/build.log 2>&1
-        rm -rf ${GPL_LIB_SOURCE_PATH} 1>>${BASEDIR}/build.log 2>&1
+        echo -e "\nINFO: Downloading library $1 failed. Copying library source to ${LIB_SOURCE_PATH} completed with rc=${COPY_RC}\n" 1>>${BASEDIR}/build.log 2>&1
+        rm -rf ${LIB_SOURCE_PATH} 1>>${BASEDIR}/build.log 2>&1
         echo ${COPY_RC}
         return
     fi
