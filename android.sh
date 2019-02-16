@@ -591,6 +591,21 @@ fi
 print_enabled_architectures
 print_enabled_libraries
 
+# DOWNLOAD LIBRARIES
+for library in {5..5}
+do
+    if [[ ${ENABLED_LIBRARIES[$library]} -eq 1 ]]; then
+        library_name=$(get_library_name ${library})
+
+        DOWNLOAD_RESULT=$(download_library_source ${library_name})
+        if [[ ${DOWNLOAD_RESULT} -ne 0 ]]; then
+            echo -e "\n(*) Failed to download library ${library_name} source. Please check build.log file for details. If the problem persists refer to offline building instructions.\n"
+            echo -e "\n(*) Failed to download library ${library_name} source.\n" 1>>${BASEDIR}/build.log 2>&1
+            exit 1
+        fi
+    fi
+done
+
 # CHECKING GPL LIBRARIES
 for gpl_library in {18..21}
 do

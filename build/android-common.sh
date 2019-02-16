@@ -872,6 +872,12 @@ download_library_source() {
     echo -e "\nDEBUG: Downloading library source: $1\n" 1>>${BASEDIR}/build.log 2>&1
 
     case $1 in
+        lame)
+            LIB_URL="https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz"
+            LIB_FILE="lame-3.100.tar.gz"
+            LIB_ORIG_DIR="lame-3.100"
+            LIB_DEST_DIR="lame"
+        ;;
         libvidstab)
             LIB_URL="https://github.com/georgmartius/vid.stab/archive/v1.1.0.tar.gz"
             LIB_FILE="v1.1.0.tar.gz"
