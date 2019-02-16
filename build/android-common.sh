@@ -972,15 +972,13 @@ set_toolchain_clang_paths() {
     TARGET_HOST=$(get_target_host)
 
     # From Docs, Note: For 32-bit ARM, the compiler is prefixed with armv7a-linux-androideabi, but the binutils tools are prefixed with arm-linux-androideabi. For other architectures, the prefixes are the same for all tools.
-    case ${ARCH} in
-        arm-v7a | arm-v7a-neon)
-            export CC=armv7a-linux-androideabi${API}-clang
-            export CXX=armv7a-linux-androideabi${API}-clang++
-        ;;
-        *)
-            export CC=${TARGET_HOST}${API}-clang
-            export CXX=${TARGET_HOST}${API}-clang++
-    esac
+    if [[ ${ARCH} == arm-v7a* ]]; then
+        export CC=armv7a-linux-androideabi${API}-clang
+        export CXX=armv7a-linux-androideabi${API}-clang++
+    else
+        export CC=${TARGET_HOST}${API}-clang
+        export CXX=${TARGET_HOST}${API}-clang++
+    fi
 
     export AR=${TARGET_HOST}-ar
 
