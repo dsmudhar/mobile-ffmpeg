@@ -612,19 +612,12 @@ do
     fi
 done
 
-# CLEANING PREVIOUSLY COPIED c++_shared.so FILES
-rm -rf ${BASEDIR}/prebuilt/android-cpp-shared 1>>${BASEDIR}/build.log 2>&1
-
 for run_arch in {0..4}
 do
     if [[ ${ENABLED_ARCHITECTURES[$run_arch]} -eq 1 ]]; then
         export ARCH=$(get_arch_name $run_arch)
         export TOOLCHAIN=$(get_toolchain)
         export TOOLCHAIN_ARCH=$(get_toolchain_arch)
-
-        # COPY libc++_shared.so FROM EACH TOOLCHAIN
-        mkdir -p ${BASEDIR}/prebuilt/android-cpp-shared/${TOOLCHAIN_ARCH}
-        cp $(get_toolchain_root)/sysroot/usr/lib/$(get_target_host)/libc++_shared.so ${BASEDIR}/prebuilt/android-cpp-shared/${TOOLCHAIN_ARCH} 1>>${BASEDIR}/build.log 2>&1
 
         . ${BASEDIR}/build/main-android.sh "${ENABLED_LIBRARIES[@]}" || exit 1
 
