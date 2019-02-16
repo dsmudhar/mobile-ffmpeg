@@ -35,7 +35,7 @@ include $(CLEAR_VARS)
 LOCAL_ARM_MODE := $(MY_ARM_MODE)
 LOCAL_MODULE := mobileffmpeg-abidetect
 LOCAL_SRC_FILES := $(MY_PATH)/mobileffmpeg_abidetect.c
-LOCAL_CFLAGS := -Wall -Wextra -Werror -Wno-unused-parameter -I${LOCAL_PATH}/../../prebuilt/android-$(TARGET_ARCH)/ffmpeg/include -I$(NDK_ROOT)/sources/android/cpufeatures -DMOBILE_FFMPEG_${MY_ARCH_FLAGS}
+LOCAL_CFLAGS := -Wall -Wextra -Werror -Wno-unused-parameter -I${LOCAL_PATH}/../../prebuilt/$(TARGET_ARCH)/ffmpeg/include -I$(NDK_ROOT)/sources/android/cpufeatures -DMOBILE_FFMPEG_${MY_ARCH_FLAGS}
 LOCAL_LDLIBS := -llog -lz -landroid
 LOCAL_SHARED_LIBRARIES := cpufeatures
 LOCAL_ARM_NEON := ${MY_ARM_NEON}
@@ -45,7 +45,7 @@ include $(CLEAR_VARS)
 LOCAL_ARM_MODE := $(MY_ARM_MODE)
 LOCAL_MODULE := mobileffmpeg
 LOCAL_SRC_FILES := $(MY_PATH)/mobileffmpeg.c $(MY_PATH)/fftools_cmdutils.c $(MY_PATH)/fftools_ffmpeg.c $(MY_PATH)/fftools_ffmpeg_opt.c $(MY_PATH)/fftools_ffmpeg_hw.c $(MY_PATH)/fftools_ffmpeg_filter.c
-LOCAL_CFLAGS := -Wall -Werror -Wno-unused-parameter -Wno-switch -Wno-sign-compare -I${LOCAL_PATH}/../../prebuilt/android-$(TARGET_ARCH)/ffmpeg/include
+LOCAL_CFLAGS := -Wall -Werror -Wno-unused-parameter -Wno-switch -Wno-sign-compare -I${LOCAL_PATH}/../../prebuilt/$(TARGET_ARCH)/ffmpeg/include
 LOCAL_LDLIBS := -llog -lz -landroid
 LOCAL_SHARED_LIBRARIES := c++_shared libavfilter libavformat libavcodec libavutil libswresample libavdevice libswscale
 LOCAL_ARM_NEON := ${MY_ARM_NEON}
