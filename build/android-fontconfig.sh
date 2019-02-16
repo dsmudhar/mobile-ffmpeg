@@ -44,10 +44,10 @@ if [[ ${RECONF_fontconfig} -eq 1 ]]; then
 fi
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
-    --with-libiconv-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libiconv \
-    --with-expat=${BASEDIR}/prebuilt/android-$(get_target_build)/expat \
+    --with-libiconv-prefix=$(get_prefix_root)/libiconv \
+    --with-expat=$(get_prefix_root)/expat \
     --without-libintl-prefix \
     --enable-static \
     --disable-shared \

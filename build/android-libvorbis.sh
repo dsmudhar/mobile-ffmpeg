@@ -44,11 +44,11 @@ ${SED_INLINE} 's/\-mno-ieee-fp//g' ${BASEDIR}/src/${LIB_NAME}/configure.ac
 autoreconf_library ${LIB_NAME}
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
     --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
-    --with-ogg-includes=${BASEDIR}/prebuilt/android-$(get_target_build)/libogg/include \
-    --with-ogg-libraries=${BASEDIR}/prebuilt/android-$(get_target_build)/libogg/lib \
+    --with-ogg-includes=$(get_prefix_root)/libogg/include \
+    --with-ogg-libraries=$(get_prefix_root)/libogg/lib \
     --enable-static \
     --disable-shared \
     --disable-fast-install \

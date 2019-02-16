@@ -61,7 +61,7 @@ cd ${BASEDIR}/src/${LIB_NAME} || exit 1
 make distclean 2>/dev/null 1>/dev/null
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     --target="${TARGET_CPU}-android-gcc" \
     --extra-cflags="${CFLAGS}" \
     --extra-cxxflags="${CXXFLAGS}" \

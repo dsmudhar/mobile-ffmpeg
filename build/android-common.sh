@@ -394,7 +394,7 @@ create_chromaprint_package_config() {
     local CHROMAPRINT_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/libchromaprint.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/chromaprint
+prefix=$(get_prefix_root)/chromaprint
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
 includedir=\${prefix}/include
@@ -412,7 +412,7 @@ create_fontconfig_package_config() {
     local FONTCONFIG_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/fontconfig.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/fontconfig
+prefix=$(get_prefix_root)/fontconfig
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
 includedir=\${prefix}/include
@@ -437,7 +437,7 @@ create_freetype_package_config() {
     local FREETYPE_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/freetype2.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/freetype
+prefix=$(get_prefix_root)/freetype
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
 includedir=\${prefix}/include
@@ -458,7 +458,7 @@ create_giflib_package_config() {
     local GIFLIB_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/giflib.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/giflib
+prefix=$(get_prefix_root)/giflib
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -477,7 +477,7 @@ create_gmp_package_config() {
     local GMP_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/gmp.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/gmp
+prefix=$(get_prefix_root)/gmp
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -496,7 +496,7 @@ create_gnutls_package_config() {
     local GNUTLS_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/gnutls.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/gnutls
+prefix=$(get_prefix_root)/gnutls
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
 includedir=\${prefix}/include
@@ -516,7 +516,7 @@ create_libaom_package_config() {
     local AOM_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/aom.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libaom
+prefix=$(get_prefix_root)/libaom
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -535,7 +535,7 @@ create_libiconv_package_config() {
     local LIB_ICONV_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/libiconv.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libiconv
+prefix=$(get_prefix_root)/libiconv
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
 includedir=\${prefix}/include
@@ -554,7 +554,7 @@ create_libmp3lame_package_config() {
     local LAME_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/libmp3lame.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/lame
+prefix=$(get_prefix_root)/lame
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
 includedir=\${prefix}/include
@@ -573,7 +573,7 @@ create_libvorbis_package_config() {
     local LIBVORBIS_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/vorbis.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libvorbis
+prefix=$(get_prefix_root)/libvorbis
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -588,7 +588,7 @@ Cflags: -I\${includedir}
 EOF
 
 cat > "${INSTALL_PKG_CONFIG_DIR}/vorbisenc.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libvorbis
+prefix=$(get_prefix_root)/libvorbis
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -604,7 +604,7 @@ Cflags: -I\${includedir}
 EOF
 
 cat > "${INSTALL_PKG_CONFIG_DIR}/vorbisfile.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libvorbis
+prefix=$(get_prefix_root)/libvorbis
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -624,7 +624,7 @@ create_libwebp_package_config() {
     local LIB_WEBP_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/libwebp.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libwebp
+prefix=$(get_prefix_root)/libwebp
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -643,7 +643,7 @@ create_libxml2_package_config() {
     local LIBXML2_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/libxml-2.0.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libxml2
+prefix=$(get_prefix_root)/libxml2
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
 includedir=\${prefix}/include
@@ -663,7 +663,7 @@ create_snappy_package_config() {
     local SNAPPY_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/snappy.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/snappy
+prefix=$(get_prefix_root)/snappy
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -682,7 +682,7 @@ create_soxr_package_config() {
     local SOXR_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/soxr.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/soxr
+prefix=$(get_prefix_root)/soxr
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -701,7 +701,7 @@ create_tesseract_package_config() {
     local TESSERACT_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/tesseract.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/tesseract
+prefix=$(get_prefix_root)/tesseract
 exec_prefix=\${prefix}
 bindir=\${exec_prefix}/bin
 datarootdir=\${prefix}/share
@@ -724,7 +724,7 @@ create_uuid_package_config() {
     local UUID_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/uuid.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/libuuid
+prefix=$(get_prefix_root)/libuuid
 exec_prefix=\${prefix}
 libdir=\${exec_prefix}/lib
 includedir=\${prefix}/include
@@ -742,7 +742,7 @@ create_x265_package_config() {
     local X265_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/x265.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/x265
+prefix=$(get_prefix_root)/x265
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -762,7 +762,7 @@ create_xvidcore_package_config() {
     local XVIDCORE_VERSION="$1"
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/xvidcore.pc" << EOF
-prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/xvidcore
+prefix=$(get_prefix_root)/xvidcore
 exec_prefix=\${prefix}
 libdir=\${prefix}/lib
 includedir=\${prefix}/include
@@ -971,7 +971,7 @@ set_toolchain_clang_paths() {
     export RANLIB=${TARGET_HOST}-ranlib
     export STRIP=${TARGET_HOST}-strip
 
-    export INSTALL_PKG_CONFIG_DIR="${BASEDIR}/prebuilt/android-$(get_target_build)/pkgconfig"
+    export INSTALL_PKG_CONFIG_DIR="$(get_prefix_root)/pkgconfig"
     export ZLIB_PACKAGE_CONFIG_PATH="${INSTALL_PKG_CONFIG_DIR}/zlib.pc"
 
     if [ ! -d ${INSTALL_PKG_CONFIG_DIR} ]; then

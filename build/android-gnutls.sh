@@ -33,16 +33,16 @@ COMMON_CFLAGS=$(get_cflags ${LIB_NAME})
 COMMON_CXXFLAGS=$(get_cxxflags ${LIB_NAME})
 COMMON_LDFLAGS=$(get_ldflags ${LIB_NAME})
 
-export CFLAGS="${COMMON_CFLAGS} -I${BASEDIR}/prebuilt/android-$(get_target_build)/libiconv/include"
+export CFLAGS="${COMMON_CFLAGS} -I$(get_prefix_root)/libiconv/include"
 export CXXFLAGS="${COMMON_CXXFLAGS}"
-export LDFLAGS="${COMMON_LDFLAGS} -L${BASEDIR}/prebuilt/android-$(get_target_build)/libiconv/lib"
+export LDFLAGS="${COMMON_LDFLAGS} -L$(get_prefix_root)/libiconv/lib"
 
-export NETTLE_CFLAGS="-I${BASEDIR}/prebuilt/android-$(get_target_build)/nettle/include"
-export NETTLE_LIBS="-L${BASEDIR}/prebuilt/android-$(get_target_build)/nettle/lib"
-export HOGWEED_CFLAGS="-I${BASEDIR}/prebuilt/android-$(get_target_build)/nettle/include"
-export HOGWEED_LIBS="-L${BASEDIR}/prebuilt/android-$(get_target_build)/nettle/lib"
-export GMP_CFLAGS="-I${BASEDIR}/prebuilt/android-$(get_target_build)/gmp/include"
-export GMP_LIBS="-L${BASEDIR}/prebuilt/android-$(get_target_build)/gmp/lib"
+export NETTLE_CFLAGS="-I$(get_prefix_root)/nettle/include"
+export NETTLE_LIBS="-L$(get_prefix_root)/nettle/lib"
+export HOGWEED_CFLAGS="-I$(get_prefix_root)/nettle/include"
+export HOGWEED_LIBS="-L$(get_prefix_root)/nettle/lib"
+export GMP_CFLAGS="-I$(get_prefix_root)/gmp/include"
+export GMP_LIBS="-L$(get_prefix_root)/gmp/lib"
 
 cd ${BASEDIR}/src/${LIB_NAME} || exit 1
 
@@ -54,7 +54,7 @@ if [[ ${RECONF_gnutls} -eq 1 ]]; then
 fi
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
     --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
     --with-included-libtasn1 \

@@ -47,7 +47,7 @@ export SNDFILE_CFLAGS="$(pkg-config --cflags sndfile)"
 export SNDFILE_LIBS="$(pkg-config --libs --static sndfile)"
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
     --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
     --enable-static \

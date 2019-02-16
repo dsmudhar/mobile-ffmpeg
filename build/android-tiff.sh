@@ -43,11 +43,11 @@ if [[ ${RECONF_tiff} -eq 1 ]]; then
 fi
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
     --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
-    --with-jpeg-include-dir=${BASEDIR}/prebuilt/android-$(get_target_build)/jpeg/include \
-    --with-jpeg-lib-dir=${BASEDIR}/prebuilt/android-$(get_target_build)/jpeg/lib \
+    --with-jpeg-include-dir=$(get_prefix_root)/jpeg/include \
+    --with-jpeg-lib-dir=$(get_prefix_root)/jpeg/lib \
     --enable-static \
     --disable-shared \
     --disable-fast-install \

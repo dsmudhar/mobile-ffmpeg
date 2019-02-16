@@ -43,10 +43,10 @@ mkdir build;
 cd build
 
 # OVERRIDING INCLUDE PATH ORDER
-CFLAGS="-I${BASEDIR}/prebuilt/android-$(get_target_build)/giflib/include \
--I${BASEDIR}/prebuilt/android-$(get_target_build)/jpeg/include \
--I${BASEDIR}/prebuilt/android-$(get_target_build)/libpng/include \
--I${BASEDIR}/prebuilt/android-$(get_target_build)/tiff/include $CFLAGS"
+CFLAGS="-I$(get_prefix_root)/giflib/include \
+-I$(get_prefix_root)/jpeg/include \
+-I$(get_prefix_root)/libpng/include \
+-I$(get_prefix_root)/tiff/include $CFLAGS"
 
 cmake -Wno-dev \
     -DCMAKE_VERBOSE_MAKEFILE=0 \
@@ -56,19 +56,19 @@ cmake -Wno-dev \
     -DCMAKE_SYSROOT="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot" \
     -DCMAKE_FIND_ROOT_PATH="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot" \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX="${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME}" \
+    -DCMAKE_INSTALL_PREFIX="$(get_prefix_root)/${LIB_NAME}" \
     -DCMAKE_SYSTEM_NAME=Generic \
     -DCMAKE_C_COMPILER="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/bin/$CC" \
     -DCMAKE_LINKER="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/bin/$LD" \
     -DCMAKE_AR="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/bin/$AR" \
     -DCMAKE_AS="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/bin/$AS" \
-    -DGIF_INCLUDE_DIR="${BASEDIR}/prebuilt/android-$(get_target_build)/giflib/include" \
-    -DJPEG_INCLUDE_DIR="${BASEDIR}/prebuilt/android-$(get_target_build)/jpeg/include" \
-    -DJPEG_LIBRARY="${BASEDIR}/prebuilt/android-$(get_target_build)/jpeg/lib" \
-    -DPNG_PNG_INCLUDE_DIR="${BASEDIR}/prebuilt/android-$(get_target_build)/libpng/include" \
-    -DPNG_LIBRARY="${BASEDIR}/prebuilt/android-$(get_target_build)/libpng/lib" \
-    -DTIFF_INCLUDE_DIR="${BASEDIR}/prebuilt/android-$(get_target_build)/tiff/include" \
-    -DTIFF_LIBRARY="${BASEDIR}/prebuilt/android-$(get_target_build)/tiff/lib" \
+    -DGIF_INCLUDE_DIR="$(get_prefix_root)/giflib/include" \
+    -DJPEG_INCLUDE_DIR="$(get_prefix_root)/jpeg/include" \
+    -DJPEG_LIBRARY="$(get_prefix_root)/jpeg/lib" \
+    -DPNG_PNG_INCLUDE_DIR="$(get_prefix_root)/libpng/include" \
+    -DPNG_LIBRARY="$(get_prefix_root)/libpng/lib" \
+    -DTIFF_INCLUDE_DIR="$(get_prefix_root)/tiff/include" \
+    -DTIFF_LIBRARY="$(get_prefix_root)/tiff/lib" \
     -DZLIB_INCLUDE_DIR="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot/usr/include" \
     -DZLIB_LIBRARY="${ANDROID_NDK_ROOT}/platform/android-${API}/arch-$(get_target_build)/usr/lib" \
     -DCMAKE_POSITION_INDEPENDENT_CODE=1 \

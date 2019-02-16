@@ -53,7 +53,7 @@ case ${ARCH} in
 esac
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     ${ASM_FLAGS} \
     --host=${TARGET_HOST} || exit 1
 
@@ -65,4 +65,4 @@ create_xvidcore_package_config "1.3.5"
 make install || exit 1
 
 # REMOVE DYNAMIC LIBS
-rm -f ${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME}/lib/libxvidcore.so*
+rm -f $(get_prefix_root)/${LIB_NAME}/lib/libxvidcore.so*

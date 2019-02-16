@@ -106,10 +106,9 @@ set_dependency_rebuilt_flag() {
 
 echo -e "\nBuilding ${ARCH} platform on API level ${API}\n"
 echo -e "\nINFO: Starting new build for ${ARCH} on API level ${API} at "$(date)"\n" 1>>${BASEDIR}/build.log 2>&1
-INSTALL_BASE="${BASEDIR}/prebuilt/android-$(get_target_build)"
 
 # CREATING PACKAGE CONFIG DIRECTORY
-PKG_CONFIG_DIRECTORY="${INSTALL_BASE}/pkgconfig"
+PKG_CONFIG_DIRECTORY="$(get_prefix_root)/pkgconfig"
 if [ ! -d ${PKG_CONFIG_DIRECTORY} ]; then
     mkdir -p ${PKG_CONFIG_DIRECTORY} || exit 1
 fi
@@ -211,9 +210,9 @@ while [ ${#enabled_library_list[@]} -gt $completed ]; do
         DEPENDENCY_REBUILT_FLAG=$(echo "DEPENDENCY_REBUILT_${library}" | sed "s/\-/\_/g")
 
         if [ $run -eq 1 ] && [[ -z ${!BUILD_COMPLETED_FLAG} ]]; then
-            ENABLED_LIBRARY_PATH="${INSTALL_BASE}/${library}"
+            ENABLED_LIBRARY_PATH="$(get_prefix_root)/${library}"
 
-            LIBRARY_IS_INSTALLED=$(library_is_installed ${INSTALL_BASE} ${library})
+            LIBRARY_IS_INSTALLED=$(library_is_installed $(get_prefix_root) ${library})
 
             echo -e "INFO: Flags detected for ${library}: already installed=${LIBRARY_IS_INSTALLED}, rebuild=${!REBUILD_FLAG}, dependency rebuilt=${!DEPENDENCY_REBUILT_FLAG}\n" 1>>${BASEDIR}/build.log 2>&1
 
@@ -231,7 +230,7 @@ while [ ${#enabled_library_list[@]} -gt $completed ]; do
                 echo -n "${library}: "
 
                 if [ -d ${ENABLED_LIBRARY_PATH} ]; then
-                    rm -rf ${INSTALL_BASE}/${library} || exit 1
+                    rm -rf $(get_prefix_root)/${library} || exit 1
                 fi
 
                 SCRIPT_PATH="${BASEDIR}/build/android-${library}.sh"

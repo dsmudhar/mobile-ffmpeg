@@ -44,7 +44,7 @@ if [[ ${RECONF_libtheora} -eq 1 ]]; then
 fi
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
     --enable-static \
     --disable-shared \

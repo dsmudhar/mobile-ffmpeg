@@ -42,14 +42,14 @@ if [[ ! -f ${BASEDIR}/src/${LIB_NAME}/configure ]] || [[ ${RECONF_tesseract} -eq
     autoreconf_library ${LIB_NAME}
 fi
 
-export LEPTONICA_CFLAGS="-I${BASEDIR}/prebuilt/android-$(get_target_build)/leptonica/include/leptonica"
-export LEPTONICA_LIBS="-L${BASEDIR}/prebuilt/android-$(get_target_build)/leptonica/lib -llept"
+export LEPTONICA_CFLAGS="-I$(get_prefix_root)/leptonica/include/leptonica"
+export LEPTONICA_LIBS="-L$(get_prefix_root)/leptonica/lib -llept"
 
 # MANUALLY SET ENDIANNESS
 export ac_cv_c_bigendian=no
 
 ./configure \
-    --prefix=${BASEDIR}/prebuilt/android-$(get_target_build)/${LIB_NAME} \
+    --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
     --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
     --enable-static \
