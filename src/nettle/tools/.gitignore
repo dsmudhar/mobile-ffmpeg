@@ -1,7 +1,0 @@
-*.o.d
-/Makefile
-/nettle-lfib-stream
-/nettle-pbkdf2
-/pkcs1-conv
-/sexp-conv
-/nettle-hash

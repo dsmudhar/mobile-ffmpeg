@@ -1,7 +1,0 @@
-/.deps/
-/Makefile
-/gnutls.pc
-/.libs/
-*.lo
-*.o
-*.la

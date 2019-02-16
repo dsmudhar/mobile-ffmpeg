@@ -864,6 +864,9 @@ download() {
 }
 
 download_library_source() {
+
+    echo -e "\nDEBUG: Downloading library source: $1\n" 1>>${BASEDIR}/build.log 2>&1
+    
     local LIB_URL=""
     local LIB_FILE=""
     local LIB_ORIG_DIR=""
@@ -872,39 +875,214 @@ download_library_source() {
     echo -e "\nDEBUG: Downloading library source: $1\n" 1>>${BASEDIR}/build.log 2>&1
 
     case $1 in
+        fontconfig)
+            LIB_URL="https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.13.1.tar.gz"
+            LIB_FILE="fontconfig-v2.13.1.tar.gz"
+            LIB_ORIG_DIR="fontconfig-2.13.1"
+        ;;
+        freetype)
+            LIB_URL="https://downloads.sourceforge.net/project/freetype/freetype2/2.9.1/freetype-2.9.1.tar.gz"
+            LIB_FILE="freetype-v2.9.1.tar.gz"
+            LIB_ORIG_DIR="freetype-2.9.1"
+        ;;
+        fribidi)
+            LIB_URL="https://github.com/fribidi/fribidi/archive/v1.0.5.tar.gz"
+            LIB_FILE="fribidi-v1.0.5.tar.gz"
+            LIB_ORIG_DIR="fribidi-1.0.5"
+        ;;
+        gmp)
+            LIB_URL="https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz"
+            LIB_FILE="gmp-v6.1.2.tar.xz"
+            LIB_ORIG_DIR="gmp-6.1.2"
+        ;;
+        gnutls)
+            LIB_URL="https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.6.tar.xz"
+            LIB_FILE="gnutls-v3.6.6.tar.xz"
+            LIB_ORIG_DIR="gnutls-3.6.6"
+        ;;
         lame)
             LIB_URL="https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz"
-            LIB_FILE="lame-3.100.tar.gz"
+            LIB_FILE="lame-v3.100.tar.gz"
             LIB_ORIG_DIR="lame-3.100"
-            LIB_DEST_DIR="lame"
+        ;;
+        libass)
+            LIB_URL="https://github.com/libass/libass/archive/0.14.0.tar.gz"
+            LIB_FILE="libass-v0.14.0.tar.gz"
+            LIB_ORIG_DIR="libass-0.14.0"
+        ;;
+        libiconv)
+            LIB_URL="https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz"
+            LIB_FILE="libiconv-v1.15.tar.gz"
+            LIB_ORIG_DIR="libiconv-1.15"
+        ;;
+        libtheora)
+            LIB_URL="http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2"
+            LIB_FILE="libtheora-v1.1.1.tar.bz2"
+            LIB_ORIG_DIR="libtheora-1.1.1"
+        ;;
+        libvorbis)
+            LIB_URL="http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.6.tar.gz"
+            LIB_FILE="libvorbis-v1.3.6.tar.gz"
+            LIB_ORIG_DIR="libvorbis-1.3.6"
+        ;;
+        libvpx)
+            LIB_URL="https://github.com/webmproject/libvpx/archive/v1.8.0.tar.gz"
+            LIB_FILE="libvpx-v1.8.0.tar.gz"
+            LIB_ORIG_DIR="libvpx-1.8.0"
+        ;;
+        libwebp)
+            LIB_URL="https://github.com/webmproject/libwebp/archive/v1.0.2.tar.gz"
+            LIB_FILE="libwebp-v1.0.2.tar.gz"
+            LIB_ORIG_DIR="libwebp-1.0.2"
+        ;;
+        libxml2)
+            LIB_URL="https://github.com/GNOME/libxml2/archive/v2.9.9.tar.gz"
+            LIB_FILE="libxml2-v2.9.9.tar.gz"
+            LIB_ORIG_DIR="libxml2-2.9.9"
+        ;;
+        opencore-amr)
+            LIB_URL="https://downloads.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-0.1.5.tar.gz"
+            LIB_FILE="opencore-amr-v0.1.5.tar.gz"
+            LIB_ORIG_DIR="opencore-amr-0.1.5"
+        ;;
+        shine)
+            LIB_URL="https://github.com/toots/shine/archive/3.1.1.tar.gz"
+            LIB_FILE="shine-v3.1.1.tar.gz"
+            LIB_ORIG_DIR="shine-3.1.1"
+        ;;
+        speex)
+            LIB_URL="http://downloads.us.xiph.org/releases/speex/speex-1.2.0.tar.gz"
+            LIB_FILE="speex-v1.2.0.tar.gz"
+            LIB_ORIG_DIR="speex-1.2.0"
+        ;;
+        wavpack)
+            LIB_URL="https://github.com/dbry/WavPack/archive/5.1.0.tar.gz"
+            LIB_FILE="wavpack-v5.1.0.tar.gz"
+            LIB_ORIG_DIR="wavpack-5.1.0"
+        ;;
+        kvazaar)
+            LIB_URL="https://github.com/ultravideo/kvazaar/archive/v1.2.0.tar.gz"
+            LIB_FILE="kvazaar-v1.2.0.tar.gz"
+            LIB_ORIG_DIR="kvazaar-1.2.0"
+        ;;
+        libilbc)
+            LIB_URL="https://github.com/TimothyGu/libilbc/archive/v2.0.2.tar.gz"
+            LIB_FILE="libilbc-v2.0.2.tar.gz"
+            LIB_ORIG_DIR="libilbc-2.0.2"
+        ;;
+        opus)
+            LIB_URL="https://archive.mozilla.org/pub/opus/opus-1.3.tar.gz"
+            LIB_FILE="opus-v1.3.tar.gz"
+            LIB_ORIG_DIR="opus-1.3"
+        ;;
+        snappy)
+            LIB_URL="https://github.com/google/snappy/archive/1.1.7.tar.gz"
+            LIB_FILE="snappy-v1.1.7.tar.gz"
+            LIB_ORIG_DIR="snappy-1.1.7"
+        ;;
+        soxr)
+            LIB_URL="https://downloads.sourceforge.net/project/soxr/soxr-0.1.3-Source.tar.xz"
+            LIB_FILE="soxr-v0.1.3.tar.xz"
+            LIB_ORIG_DIR="soxr-0.1.3-Source"
+        ;;
+        libaom)
+            LIB_URL="https://aomedia.googlesource.com/aom/+archive/v1.0.0.tar.gz"
+            LIB_FILE="libaom-v1.0.0.tar.gz"
+            LIB_ORIG_DIR="."
+        ;;
+        chromaprint)
+            LIB_URL="https://github.com/acoustid/chromaprint/archive/v1.4.3.tar.gz"
+            LIB_FILE="chromaprint-v1.4.3.tar.gz"
+            LIB_ORIG_DIR="chromaprint-1.4.3"
+        ;;
+        twolame)
+            LIB_URL="https://downloads.sourceforge.net/project/twolame/twolame/0.3.13/twolame-0.3.13.tar.gz"
+            LIB_FILE="twolame-v0.3.13.tar.gz"
+            LIB_ORIG_DIR="twolame-0.3.13"
+        ;;
+        sdl)
+            LIB_URL="https://www.libsdl.org/release/SDL2-2.0.9.tar.gz"
+            LIB_FILE="sdl-v2.0.9.tar.gz"
+            LIB_ORIG_DIR="SDL2-2.0.9"
+        ;;
+        tesseract)
+            LIB_URL="https://github.com/tesseract-ocr/tesseract/archive/4.0.0.tar.gz"
+            LIB_FILE="tesseract-v4.0.0.tar.gz"
+            LIB_ORIG_DIR="tesseract-4.0.0"
+        ;;
+        giflib)
+            LIB_URL="https://downloads.sourceforge.net/project/giflib/giflib-5.1.6.tar.gz"
+            LIB_FILE="giflib-v5.1.6.tar.gz"
+            LIB_ORIG_DIR="giflib-5.1.6"
+        ;;
+        jpeg)
+            LIB_URL="https://downloads.sourceforge.net/project/libjpeg/libjpeg/6b/jpegsrc.v6b.tar.gz"
+            LIB_FILE="jpeg-v6b.tar.gz"
+            LIB_ORIG_DIR="jpeg-6b"
+        ;;
+        libogg)
+            LIB_URL="http://downloads.xiph.org/releases/ogg/libogg-1.3.3.tar.gz"
+            LIB_FILE="libogg-v1.3.3.tar.gz"
+            LIB_ORIG_DIR="libogg-1.3.3"
+        ;;
+        libpng)
+            LIB_URL="https://downloads.sourceforge.net/project/libpng/libpng16/1.6.36/libpng-1.6.36.tar.gz"
+            LIB_FILE="libpng-v1.6.36.tar.gz"
+            LIB_ORIG_DIR="libpng-1.6.36"
+        ;;
+        libuuid)
+            LIB_URL="https://downloads.sourceforge.net/project/libuuid/libuuid-1.0.3.tar.gz"
+            LIB_FILE="libuuid-v1.0.3.tar.gz"
+            LIB_ORIG_DIR="libuuid-1.0.3"
+        ;;
+        nettle)
+            LIB_URL="https://ftp.gnu.org/gnu/nettle/nettle-3.4.1.tar.gz"
+            LIB_FILE="nettle-v3.4.1.tar.gz"
+            LIB_ORIG_DIR="nettle-3.4.1"
+        ;;
+        tiff)
+            LIB_URL="http://download.osgeo.org/libtiff/tiff-4.0.10.tar.gz"
+            LIB_FILE="tiff-v4.0.10.tar.gz"
+            LIB_ORIG_DIR="tiff-4.0.10"
+        ;;
+        expat)
+            LIB_URL="https://github.com/libexpat/libexpat/archive/R_2_2_6.tar.gz"
+            LIB_FILE="expat-r2.2.6.tar.gz"
+            LIB_ORIG_DIR="libexpat-R_2_2_6"
+        ;;
+        libsndfile)
+            LIB_URL="http://www.mega-nerd.com/libsndfile/files/libsndfile-1.0.28.tar.gz"
+            LIB_FILE="libsndfile-v1.0.28.tar.gz"
+            LIB_ORIG_DIR="libsndfile-1.0.28"
+        ;;
+        leptonica)
+            LIB_URL="http://www.leptonica.com/source/leptonica-1.77.0.tar.gz"
+            LIB_FILE="leptonica-v1.77.0.tar.gz"
+            LIB_ORIG_DIR="leptonica-1.77.0"
         ;;
         libvidstab)
             LIB_URL="https://github.com/georgmartius/vid.stab/archive/v1.1.0.tar.gz"
-            LIB_FILE="v1.1.0.tar.gz"
+            LIB_FILE="libvidstab-v1.1.0.tar.gz"
             LIB_ORIG_DIR="vid.stab-1.1.0"
-            LIB_DEST_DIR="libvidstab"
         ;;
         x264)
-            LIB_URL="ftp://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20181224-2245-stable.tar.bz2"
-            LIB_FILE="x264-snapshot-20181224-2245-stable.tar.bz2"
-            LIB_ORIG_DIR="x264-snapshot-20181224-2245-stable"
-            LIB_DEST_DIR="x264"
+            LIB_URL="https://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20190215-2245-stable.tar.bz2"
+            LIB_FILE="x264-snapshot-20190215-2245-stable.tar.bz2"
+            LIB_ORIG_DIR="x264-snapshot-20190215-2245-stable"
         ;;
         x265)
             LIB_URL="https://download.videolan.org/pub/videolan/x265/x265_2.9.tar.gz"
-            LIB_FILE="x265-2.9.tar.gz"
+            LIB_FILE="x265-v2.9.tar.gz"
             LIB_ORIG_DIR="x265_2.9"
-            LIB_DEST_DIR="x265"
         ;;
         xvidcore)
             LIB_URL="https://downloads.xvid.com/downloads/xvidcore-1.3.5.tar.gz"
-            LIB_FILE="xvidcore-1.3.5.tar.gz"
+            LIB_FILE="xvidcore-v1.3.5.tar.gz"
             LIB_ORIG_DIR="xvidcore"
-            LIB_DEST_DIR="xvidcore"
         ;;
     esac
 
-    local LIB_SOURCE_PATH="${BASEDIR}/src/${LIB_DEST_DIR}"
+    local LIB_SOURCE_PATH="${BASEDIR}/src/$1"
 
     if [ -d "${LIB_SOURCE_PATH}" ]; then
         echo -e "INFO: $1 already downloaded. Source folder found at ${LIB_SOURCE_PATH}\n" 1>>${BASEDIR}/build.log 2>&1
@@ -935,28 +1113,28 @@ download_library_source() {
     local EXTRACT_COMMAND=""
 
     if [[ ${LIB_FILE} == *bz2 ]]; then
-        EXTRACT_COMMAND="tar jxf ${LIB_PACKAGE_PATH} --directory ${MOBILE_FFMPEG_TMPDIR}"
+        EXTRACT_COMMAND="tar jxf ${LIB_PACKAGE_PATH} --directory ${MOBILE_FFMPEG_TMPDIR}/$1"
     else
-        EXTRACT_COMMAND="tar zxf ${LIB_PACKAGE_PATH} --directory ${MOBILE_FFMPEG_TMPDIR}"
+        EXTRACT_COMMAND="tar zxf ${LIB_PACKAGE_PATH} --directory ${MOBILE_FFMPEG_TMPDIR}/$1"
     fi
 
-    echo -e "DEBUG: Extracting library package ${LIB_FILE} inside ${MOBILE_FFMPEG_TMPDIR}\n" 1>>${BASEDIR}/build.log 2>&1
+    echo -e "DEBUG: Extracting library package ${LIB_FILE} inside ${MOBILE_FFMPEG_TMPDIR}/${1}\n" 1>>${BASEDIR}/build.log 2>&1
 
-    ${EXTRACT_COMMAND} 1>>${BASEDIR}/build.log 2>&1
+    mkdir -p ${MOBILE_FFMPEG_TMPDIR}/$1 && ${EXTRACT_COMMAND} 1>>${BASEDIR}/build.log 2>&1
 
     local EXTRACT_RC=$?
 
     if [ ${EXTRACT_RC} -ne 0 ]; then
         echo -e "\nINFO: Downloading library $1 failed. Extract for library package ${LIB_FILE} completed with rc=${EXTRACT_RC}. Deleting failed files.\n" 1>>${BASEDIR}/build.log 2>&1
         rm -f ${LIB_PACKAGE_PATH} 1>>${BASEDIR}/build.log 2>&1
-        rm -rf ${MOBILE_FFMPEG_TMPDIR}/${LIB_ORIG_DIR} 1>>${BASEDIR}/build.log 2>&1
+        rm -rf ${MOBILE_FFMPEG_TMPDIR}/$1/${LIB_ORIG_DIR} 1>>${BASEDIR}/build.log 2>&1
         echo ${EXTRACT_RC}
         return
     fi
 
     echo -e "DEBUG: Extract completed. Copying library source to ${LIB_SOURCE_PATH}\n" 1>>${BASEDIR}/build.log 2>&1
 
-    COPY_COMMAND="cp -r ${MOBILE_FFMPEG_TMPDIR}/${LIB_ORIG_DIR} ${LIB_SOURCE_PATH}"
+    COPY_COMMAND="cp -r ${MOBILE_FFMPEG_TMPDIR}/$1/${LIB_ORIG_DIR} ${LIB_SOURCE_PATH}"
 
     ${COPY_COMMAND} 1>>${BASEDIR}/build.log 2>&1
 

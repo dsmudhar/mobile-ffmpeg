@@ -1,8 +1,0 @@
-/.deps/
-/Makefile
-/arg-nonnull.h
-/c++defs.h
-/ctype.h
-/fcntl.h
-/inttypes.h
-/warn-on-use.h
