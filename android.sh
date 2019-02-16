@@ -650,21 +650,21 @@ done
 rm -f ${BASEDIR}/android/build/.neon 1>>${BASEDIR}/build.log 2>&1
 ANDROID_ARCHITECTURES=""
 if [[ ${ENABLED_ARCHITECTURES[1]} -eq 1 ]]; then
-    ANDROID_ARCHITECTURES+="$(get_android_arch 0) "
+    ANDROID_ARCHITECTURES+="armeabi-v7a "
     mkdir -p ${BASEDIR}/android/build 1>>${BASEDIR}/build.log 2>&1
     cat > "${BASEDIR}/android/build/.neon" << EOF
 EOF
 elif [[ ${ENABLED_ARCHITECTURES[0]} -eq 1 ]]; then
-    ANDROID_ARCHITECTURES+="$(get_android_arch 0) "
+    ANDROID_ARCHITECTURES+="armeabi-v7a "
 fi
 if [[ ${ENABLED_ARCHITECTURES[2]} -eq 1 ]]; then
-    ANDROID_ARCHITECTURES+="$(get_android_arch 2) "
+    ANDROID_ARCHITECTURES+="arm64-v8a "
 fi
 if [[ ${ENABLED_ARCHITECTURES[3]} -eq 1 ]]; then
-    ANDROID_ARCHITECTURES+="$(get_android_arch 3) "
+    ANDROID_ARCHITECTURES+="x86 "
 fi
 if [[ ${ENABLED_ARCHITECTURES[4]} -eq 1 ]]; then
-    ANDROID_ARCHITECTURES+="$(get_android_arch 4) "
+    ANDROID_ARCHITECTURES+="x86_64 "
 fi
 
 if [[ ! -z ${ANDROID_ARCHITECTURES} ]]; then

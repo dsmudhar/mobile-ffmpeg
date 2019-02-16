@@ -166,23 +166,6 @@ get_toolchain_arch() {
     esac
 }
 
-get_android_arch() {
-    case $1 in
-        0 | 1)
-            echo "armeabi-v7a"
-        ;;
-        2)
-            echo "arm64-v8a"
-        ;;
-        3)
-            echo "x86"
-        ;;
-        4)
-            echo "x86_64"
-        ;;
-    esac
-}
-
 get_common_includes() {
     echo "-I${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot/usr/include -I${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot/usr/local/include"
 }
