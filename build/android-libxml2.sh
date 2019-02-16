@@ -40,7 +40,7 @@ make distclean 2>/dev/null 1>/dev/null
 
 # NOTE THAT PYTHON IS DISABLED DUE TO THE FOLLOWING ERROR
 #
-# .../android-sdk/ndk-bundle/toolchains/mobile-ffmpeg-api-21-arm/include/python2.7/pyport.h:1029:2: error: #error "LONG_BIT definition appears wrong for platform (bad gcc/glibc config?)."
+# $TOOLCHAIN/include/python2.7/pyport.h:1029:2: error: #error "LONG_BIT definition appears wrong for platform (bad gcc/glibc config?)."
 # #error "LONG_BIT definition appears wrong for platform (bad gcc/glibc config?)."
 #
 
