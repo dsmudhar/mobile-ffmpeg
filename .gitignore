@@ -4,3 +4,4 @@ prebuilt/
 .tmp/
 android/jni/Android.mk
 android/jni/Application.mk
+src/lame/
