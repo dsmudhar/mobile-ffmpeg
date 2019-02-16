@@ -166,6 +166,26 @@ get_toolchain_arch() {
     esac
 }
 
+get_prefix_root() {
+    echo "${BASEDIR}/prebuilt/$(get_target_build)"
+}
+
+get_toolchain_root() {
+
+    case "$(uname -s)" in
+        Linux*)
+            local HOST_TAG="linux-x86_64"
+        ;;
+        Darwin*)
+            local HOST_TAG="darwin-x86_64"
+        ;;
+        *)
+            exit 1
+    esac
+
+    echo ${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/$HOST_TAG
+}
+
 get_common_includes() {
     echo "-I$(get_toolchain_root)/sysroot/usr/include -I$(get_toolchain_root)/sysroot/usr/local/include"
 }
