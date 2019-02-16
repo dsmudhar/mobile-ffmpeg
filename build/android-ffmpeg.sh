@@ -316,7 +316,7 @@ export LDFLAGS="${LDFLAGS}"
 
 ./configure \
     --cross-prefix="${TARGET_HOST}-" \
-    --sysroot="${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot" \
+    --sysroot="$(get_toolchain_root)/sysroot" \
     --prefix="$(get_prefix_root)/${LIB_NAME}" \
     --pkg-config="${HOST_PKG_CONFIG_PATH}" \
     --enable-version3 \

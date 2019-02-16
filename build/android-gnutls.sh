@@ -56,7 +56,7 @@ fi
 ./configure \
     --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
-    --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
+    --with-sysroot=$(get_toolchain_root)/sysroot \
     --with-included-libtasn1 \
     --with-included-unistring \
     --without-idn \

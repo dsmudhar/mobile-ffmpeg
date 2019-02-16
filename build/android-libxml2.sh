@@ -50,7 +50,7 @@ autoreconf_library ${LIB_NAME}
 ./configure \
     --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
-    --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
+    --with-sysroot=$(get_toolchain_root)/sysroot \
     --with-zlib \
     --with-iconv=$(get_prefix_root)/libiconv/lib \
     --with-sax1 \

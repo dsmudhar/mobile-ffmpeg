@@ -47,7 +47,7 @@ export LIBPNG_LIBS="-L$(get_prefix_root)/libpng/lib"
     --with-pic \
     --with-zlib \
     --with-png \
-    --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
+    --with-sysroot=$(get_toolchain_root)/sysroot \
     --without-harfbuzz \
     --without-bzip2 \
     --without-fsref \

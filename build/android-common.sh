@@ -167,7 +167,7 @@ get_toolchain_arch() {
 }
 
 get_common_includes() {
-    echo "-I${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot/usr/include -I${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot/usr/local/include"
+    echo "-I$(get_toolchain_root)/sysroot/usr/include -I$(get_toolchain_root)/sysroot/usr/local/include"
 }
 
 get_common_cflags() {
@@ -311,7 +311,7 @@ get_cxxflags() {
 }
 
 get_common_linked_libraries() {
-    local COMMON_LIBRARY_PATHS="-L${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/${TARGET_HOST}/lib -L${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot/usr/lib -L${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/lib"
+    local COMMON_LIBRARY_PATHS="-L$(get_toolchain_root)/lib -L$(get_toolchain_root)/sysroot/usr/lib -L$(get_toolchain_root)/lib"
 
     case $1 in
         ffmpeg)
@@ -778,10 +778,10 @@ EOF
 }
 
 create_zlib_package_config() {
-    ZLIB_VERSION=$(grep '#define ZLIB_VERSION' ${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot/usr/include/zlib.h | grep -Eo '\".*\"' | sed -e 's/\"//g')
+    ZLIB_VERSION=$(grep '#define ZLIB_VERSION' $(get_toolchain_root)/sysroot/usr/include/zlib.h | grep -Eo '\".*\"' | sed -e 's/\"//g')
 
     cat > "${INSTALL_PKG_CONFIG_DIR}/zlib.pc" << EOF
-prefix=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot/usr
+prefix=$(get_toolchain_root)/sysroot/usr
 exec_prefix=\${prefix}
 libdir=${ANDROID_NDK_ROOT}/platforms/android-${API}/arch-${TOOLCHAIN_ARCH}/usr/lib
 includedir=\${prefix}/include
@@ -947,7 +947,7 @@ download_gpl_library_source() {
 }
 
 set_toolchain_clang_paths() {
-    export PATH=$PATH:${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/bin
+    export PATH=$PATH:$(get_toolchain_root)/bin
 
     TARGET_HOST=$(get_target_host)
     

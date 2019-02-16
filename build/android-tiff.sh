@@ -45,7 +45,7 @@ fi
 ./configure \
     --prefix=$(get_prefix_root)/${LIB_NAME} \
     --with-pic \
-    --with-sysroot=${ANDROID_NDK_ROOT}/toolchains/mobile-ffmpeg-api-${API}-${TOOLCHAIN}/sysroot \
+    --with-sysroot=$(get_toolchain_root)/sysroot \
     --with-jpeg-include-dir=$(get_prefix_root)/jpeg/include \
     --with-jpeg-lib-dir=$(get_prefix_root)/jpeg/lib \
     --enable-static \
